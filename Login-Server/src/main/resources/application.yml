@@ -24,6 +24,10 @@ spring:
         max-wait: -1ms
   application:
     name: login-server-01
+  security:
+    user:
+      name: user
+      password: 123456
 server:
   servlet:
     context-path: /rojee
@@ -41,12 +45,7 @@ server-info:
 eureka:
   client:
     service-url:
-      defaultZone: http://user:123456@localhost:1110/master-server/
+      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@localhost:1110/eureka/
     enabled: true
     register-with-eureka: true
     fetch-registry: true
-  instance:
-    hostname: localhost
-    lease-renewal-interval-in-seconds: 5
-    lease-expiration-duration-in-seconds: 15
-    instance-id: ${spring.application.name}
